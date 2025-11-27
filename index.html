@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riiz - Devz - Digital Services</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CONFIG & VARIABLES --- */
+        :root {
+            --bg-dark: #050505;
+            --neon-purple: #bc13fe;
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff0055;
+            --glass-bg: rgba(20, 20, 30, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --color-warning: #FFD700; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(rgba(5,5,5,0.8), rgba(5,5,5,0.8)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070') center/cover fixed;
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 15px 0;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--neon-purple);
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.2);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+
+        /* REVISI: Logo Name */
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            padding-top: 150px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- PRODUCTS GRID --- */
+        .products { padding: 50px 0; }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .hologram-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hologram-card:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .card-number {
+            position: absolute;
+            top: 10px; right: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: rgba(255,255,255,0.05);
+            font-weight: 900;
+        }
+
+        .hologram-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            color: var(--neon-blue);
+        }
+
+        .desc {
+            font-size: 0.85rem;
+            color: #ccc;
+            margin-bottom: 15px;
+            min-height: 40px;
+        }
+
+        .price-tag {
+            color: var(--neon-pink);
+            font-weight: bold;
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 15px;
+            text-shadow: 0 0 5px rgba(255, 0, 85, 0.5);
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid var(--neon-purple);
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .btn-action:hover {
+            background: var(--neon-purple);
+            box-shadow: 0 0 15px var(--neon-purple);
+        }
+
+        /* --- LAYANAN BANTUAN --- */
+        .services {
+            padding: 50px 0 100px;
+            background: rgba(0,0,0,0.5);
+            margin-top: 50px;
+        }
+        
+        .section-header { text-align: center; margin-bottom: 40px; font-family: 'Orbitron', sans-serif; }
+
+        .service-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .service-btn {
+            background: linear-gradient(145deg, #111, #1a1a1a);
+            border: 1px solid #333;
+            width: 140px;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .service-btn i { font-size: 2rem; color: var(--neon-blue); margin-bottom: 10px; }
+        .service-btn h4 { font-size: 0.8rem; text-align: center; }
+
+        .service-btn:hover {
+            border-color: var(--neon-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);
+        }
+
+        /* --- MODALS --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-box {
+            background: #0d0d0d;
+            border: 1px solid var(--neon-blue);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn { from {opacity:0; transform: scale(0.9);} to {opacity:1; transform: scale(1);} }
+
+        .close-modal {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        /* Select Box Styling */
+        .custom-select {
+            width: 100%;
+            padding: 12px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* New: File Input Styling */
+        .custom-file-input {
+            width: 100%;
+            padding: 10px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+        /* --- QRIS FIX CSS --- */
+        .qris-container-wrapper {
+            background: #fff;
+            padding: 5px; 
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow: hidden; 
+            border: 2px solid var(--neon-blue); 
+        }
+        .qris-img {
+            width: 100%; 
+            height: auto;
+            display: block;
+            object-fit: contain;
+            border-radius: 5px;
+            margin: 0; 
+            border: none;
+            max-height: none; 
+        }
+        /* --- END QRIS FIX CSS --- */
+
+        .generated-id {
+            background: rgba(255, 0, 85, 0.1);
+            border: 1px dashed var(--neon-pink);
+            color: var(--neon-pink);
+            padding: 10px;
+            margin: 10px 0;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
+        
+        /* Animation elements */
+        .loading-ring {
+            display: inline-block;
+            width: 40px; height: 40px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: var(--neon-blue);
+            border-radius: 50%;
+            animation: spin 1s infinite linear;
+            margin-bottom: 15px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* --- CSS Status Konfirmasi BARU --- */
+        .status-icon {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 15px;
+            transition: color 0.5s, transform 0.5s;
+        }
+
+        .status-text-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            min-height: 25px;
+            margin-bottom: 10px;
+        }
+
+        /* Warning State Styles */
+        .status-icon.warning {
+            color: var(--neon-pink); 
+            animation: pulse-warn 1s infinite alternate;
+        }
+
+        .status-text-display.warning {
+            color: var(--neon-pink);
+        }
+        
+        @keyframes pulse-warn {
+            from { transform: scale(1); opacity: 1; }
+            to { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* --- WATERMARK CSS --- */
+        .watermark {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            background: rgba(0, 0, 0, 0.6);
+            border-top: 1px solid rgba(188, 19, 254, 0.1);
+            margin-top: 50px;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+
+        .watermark strong {
+            color: var(--neon-blue);
+        }
+        .watermark .highlight {
+            color: var(--neon-pink);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">RIIZ - DEVZ</div>
+                <div style="font-size: 0.8rem; color: var(--neon-blue);">OFFICIAL</div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>DIGITAL SERVICES</h1>
+            <p>Solusi Digital Terbaik & Termurah</p>
+        </div>
+    </section>
+
+    <section class="products container">
+        <div class="cards-grid">
+            
+            <div class="hologram-card">
+                <span class="card-number">01</span>
+                <h3>PANEL BOT WA</h3>
+                <div class="desc">Server stabil. Pilih kapasitas 1GB - 10GB. Harga otomatis.</div>
+                <span class="price-tag">Mulai Rp 2.000</span>
+                <button class="btn-action" onclick="openSelectionModal('panel_wa')">PILIH PAKET</button>
+            </div>
+
+            <div class="hologram-card">
+                <span class="card-number">02</span>
+                <h3>JASA RENAME SC</h3>
+                <div class="desc">Rename full script bot/web. Harga tergantung size file.</div>
+                <span class="price-tag">Rp 15.000 (Start)</span>
+                <button class="btn-action" onclick="directBuy('Jasa Rename Script', '15.000 (Estimasi)')">ORDER</button>
+            </div>
+
+            <div class="hologram-card">
+                <span class="card-number">03</span>
+                <h3>OPEN RESELLER</h3>
+                <div class="desc">Akses panel reseller. Bisa jual ulang layanan kami.</div>
+                <span class="price-tag">Rp 15.000</span>
+                <button class="btn-action" onclick="directBuy('Open Reseller Panel', '15.000')">GABUNG</button>
+            </div>
+
+            <div class="hologram-card">
+                <span class="card-number">04</span>
+                <h3>OPEN ADMIN PANEL</h3>
+                <div class="desc">Full akses admin panel. Kontrol user & layanan.</div>
+                <span class="price-tag">Rp 15.000</span>
+                <button class="btn-action" onclick="directBuy('Open Admin Panel', '15.000')">BELI AKSES</button>
+            </div>
+
+            <div class="hologram-card">
+                <span class="card-number">05</span
+                <h3>SCRIPT NO ENC</h3>
+                <div class="desc">Source code murni tanpa enkripsi. Mudah diedit.</div>
+                <span class="price-tag">Lihat List Harga</span>
+                <button class="btn-action" onclick="openSelectionModal('script_noenc')">LIHAT LIST</button>
+            </div>
+
+            <div class="hologram-card">
+                <span class="card-number">06</span>
+                <h3>JASA ENC SCRIPT</h3>
+                <div class="desc">Mengubah script No Enc menjadi Encrypted (Aman).</div>
+                <span class="price-tag">Rp 20.000</span>
+                <button class="btn-action" onclick="directBuy('Jasa Encrypt Script', '20.000')">ORDER</button>
+            </div>
+
+            <div class="hologram-card">
+                <span class="card-number">07</span>
+                <h3>NOKOS VIRTUAL</h3>
+                <div class="desc">Nomor kosong untuk verifikasi WA/Tele/App lain.</div>
+                <span class="price-tag">Cek Harga</span>
+                <button class="btn-action" onclick="openSelectionModal('nokos')">PILIH NEGARA</button>
+            </div>
+
+            <div class="hologram-card">
+                <span class="card-number">08</span>
+                <h3>SEWA BOT WA</h3>
+                <div class="desc">Bot otomatis aktif 24 jam. Tanpa perlu sewa server.</div>
+                <span class="price-tag">Pilih Durasi</span>
+                <button class="btn-action" onclick="openSelectionModal('sewa_bot')">PILIH DURASI</button>
+            </div>
+
+            <div class="hologram-card">
+                <span class="card-number">09</span>
+                <h3>JASA EDIT PLP</h3>
+                <div class="desc">Edit file PLP PixelLab. Banner, Logo, Pamflet.</div>
+                <span class="price-tag">Rp 4.000 / File</span>
+                <button class="btn-action" onclick="directBuy('Jasa Edit PLP', '4.000')">ORDER</button>
+            </div>
+
+            <div class="hologram-card">
+                <span class="card-number">10</span>
+                <h3>APP PREMIUM</h3>
+                <div class="desc">Spotify, Youtube, Netflix, Alight Motion, dll.</div>
+                <span class="price-tag">Lihat List</span>
+                <button class="btn-action" onclick="openSelectionModal('app_prem')">LIHAT APLIKASI</button>
+            </div>
+
+             <div class="hologram-card">
+                <span class="card-number">11</span>
+                <h3>BUAT WEBSITE</h3>
+                <div class="desc">Jasa pembuatan website Landing Page / Toko Online.</div>
+                <span class="price-tag">Mulai Rp 50.000</span>
+                <button class="btn-action" onclick="openSelectionModal('website')">PILIH PAKET</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2 class="section-header">LAYANAN PUSAT BANTUAN RIIZ - DEVZ</h2>
+            <div class="service-row">
+                <div class="service-btn" onclick="startLiveChat()">
+                    <i class="fa-solid fa-headset"></i>
+                    <h4>LIVE CHAT</h4>
+                </div>
+                <div class="service-btn" onclick="openCheckOrder()">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <h4>CEK PESANAN</h4>
+                </div>
+                <div class="service-btn" onclick="window.open('https://chat.whatsapp.com/EP2Q3qQ4ZOk9i66EzzTG25?mode=hqrc', '_blank')">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <h4>OFFICIAL GROUP</h4>
+                </div>
+                <div class="service-btn" onclick="openQuestionForm()">
+                    <i class="fa-regular fa-envelope"></i>
+                    <h4>PERTANYAAN</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="modalSelection" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-modal" onclick="closeModal('modalSelection')">&times;</span>
+            <h3 id="selectTitle" style="color: var(--neon-blue); margin-bottom: 15px;">PILIH PAKET</h3>
+            
+            <div id="selectContent">
+                </div>
+
+            <p id="priceDisplay" style="color: var(--neon-pink); font-size: 1.2rem; margin: 15px 0; font-weight: bold;">-</p>
+            <button class="btn-action" onclick="proceedToPayment()">LANJUT BAYAR</button>
+        </div>
+    </div>
+
+    <div id="modalPayment" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-modal" onclick="closeModal('modalPayment')">&times;</span>
+            <h3 style="color: #fff;">PEMBAYARAN</h3>
+            <p style="font-size: 0.8rem; color: #aaa;">Scan QRIS di bawah ini</p>
+            
+            <div class="qris-container-wrapper">
+                <img src="https://img1.pixhost.to/images/10413/664491365_nuxoffc.jpg" alt="QRIS Payment" class="qris-img">
+            </div>
+            
+            <p style="font-size: 0.9rem;">Total: <span id="finalPrice" style="color: var(--neon-blue); font-weight: bold;">Rp 0</span></p>
+            
+            <div id="orderIdDisplay" class="generated-id">GENERATING...</div>
+            
+            <h4 style="color: var(--neon-blue); margin-top: 20px; font-size: 0.9rem;">UPLOAD BUKTI TRANSFER</h4>
+            <input type="file" id="proofUpload" accept="image/*" class="custom-file-input" onchange="handleImageUpload(event)" required>
+            <p id="uploadStatus" style="color: var(--neon-pink); font-size: 0.75rem; min-height: 15px; margin-top: 5px;">(Wajib unggah. Maks 5MB)</p>
+            <button class="btn-action" style="background: var(--neon-pink); border: none;" onclick="startWAConfirmation()">
+                KONFIRMASI WA
+            </button>
+        </div>
+    </div>
+
+    <div id="modalConfirmationStatus" class="modal-overlay">
+        <div class="modal-box">
+            <i id="confirmIcon" class="fa-solid fa-circle-notch loading-ring status-icon"></i>
+            <h3 id="confirmStatus" class="status-text-display">MEMULAI</h3>
+            <p id="confirmSubtext" style="color: #888; font-size: 0.8rem; min-height: 20px;"></p>
+            
+            <button id="closeBusyButton" class="btn-action" style="display: none; margin-top: 20px;" onclick="closeModal('modalConfirmationStatus')">
+                CLOSED
+            </button>
+        </div>
+    </div>
+
+    <div id="modalChat" class="modal-overlay">
+        <div class="modal-box">
+            <div id="chatLoader" class="loading-ring"></div>
+            <h3 id="chatStatus">MENGHUBUNGKAN...</h3>
+            <p id="chatSubtext" style="color: #888; font-size: 0.8rem;">Mohon tunggu</p>
+        </div>
+    </div>
+
+    <div id="modalQuestion" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-modal" onclick="closeModal('modalQuestion')">&times;</span>
+            <h3>FORM PERTANYAAN</h3>
+            <input type="text" class="custom-select" placeholder="Nama Anda">
+            <textarea class="custom-select" placeholder="Tulis pesan..." rows="3"></textarea>
+            <button class="btn-action" onclick="alert('Pesan terkirim!'); closeModal('modalQuestion');">KIRIM</button>
+        </div>
+    </div>
+
+    <div class="watermark">
+        <strong>Riiz - Devz</strong> dengan kerjasama dengan <span class="highlight">@SynthID</span>
+    </div>
+
+    <script>
+        const waNumber = '6285177452460';
+        let selectedItemName = '';
+        let selectedItemPrice = '';
+        let generatedId = '';
+        // NEW: Status upload bukti transfer
+        let isProofUploaded = false;
+
+        // --- FUNGSI MODAL UMUM ---
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        // --- DATA PRODUK & LOGIKA (Tidak Direvisi) ---
+        function openSelectionModal(type) {
+            const modal = document.getElementById('modalSelection');
+            const title = document.getElementById('selectTitle');
+            const content = document.getElementById('selectContent');
+            const priceDisplay = document.getElementById('priceDisplay');
+            
+            modal.style.display = 'flex';
+            priceDisplay.innerText = "Rp 0";
+            selectedItemName = ''; 
+
+            if (type === 'panel_wa') {
+                title.innerText = "PANEL BOT WA";
+                let html = '<select class="custom-select" id="selectionInput" onchange="updatePricePanel(this.value)">';
+                html += '<option value="0">Pilih Kapasitas</option>';
+                for(let i=1; i<=10; i++) {
+                    let price = 2000 + ((i-1)*1000); 
+                    html += `<option value="${i}|${price}">${i} GB - Rp ${price.toLocaleString()}</option>`;
+                }
+                html += '</select>';
+                content.innerHTML = html;
+            } 
+            else if (type === 'website') {
+                title.innerText = "BUAT WEBSITE";
+                content.innerHTML = `
+                    <select class="custom-select" id="selectionInput" onchange="updatePriceSimple(this.value)">
+                        <option value="0">Pilih Paket</option>
+                        <option value="Paket Hemat|50000">Paket Hemat - Rp 50.000</option>
+                        <option value="Paket Standar|80000">Paket Standar - Rp 80.000</option>
+                        <option value="Paket Pro|100000">Paket Pro - Rp 100.000</option>
+                    </select>
+                `;
+            }
+            else if (type === 'sewa_bot') {
+                title.innerText = "SEWA BOT WA";
+                content.innerHTML = `
+                    <select class="custom-select" id="selectionInput" onchange="updatePriceSimple(this.value)">
+                        <option value="0">Pilih Durasi</option>
+                        <option value="1 Minggu|5000">1 Minggu - Rp 5.000</option>
+                        <option value="1 Bulan|15000">1 Bulan - Rp 15.000</option>
+                        <option value="Permanen|35000">Permanen - Rp 35.000</option>
+                    </select>
+                `;
+            }
+            else if (type === 'script_noenc') {
+                title.innerText = "LIST SCRIPT NO ENC";
+                content.innerHTML = `
+                    <select class="custom-select" id="selectionInput" onchange="updatePriceSimple(this.value)">
+                        <option value="0">Pilih Script</option>
+                        <option value="Script Push Kontak|15000">Push Kontak - Rp 15.000</option>
+                        <option value="Script Jaga Grup|20000">Jaga Grup - Rp 20.000</option>
+                        <option value="Script Store V3|25000">Store V3 - Rp 25.000</option>
+                    </select>
+                `;
+            }
+            else if (type === 'nokos') {
+                title.innerText = "NOKOS VIRTUAL";
+                content.innerHTML = `
+                    <select class="custom-select" id="selectionInput" onchange="updatePriceSimple(this.value)">
+                        <option value="0">Pilih Negara</option>
+                        <option value="Indonesia (+62)|3500">Indonesia (+62) - Rp 3.500</option>
+                        <option value="USA (+1)|2500">USA (+1) - Rp 2.500</option>
+                        <option value="Malaysia (+60)|3000">Malaysia (+60) - Rp 3.000</option>
+                    </select>
+                `;
+            }
+            else if (type === 'app_prem') {
+                title.innerText = "APLIKASI PREMIUM";
+                content.innerHTML = `
+                    <select class="custom-select" id="selectionInput" onchange="updatePriceSimple(this.value)">
+                        <option value="0">Pilih Aplikasi</option>
+                        <option value="Spotify 1 Bulan|10000">Spotify 1 Bln - Rp 10.000</option>
+                        <option value="Youtube Prem|8000">Youtube Prem - Rp 8.000</option>
+                        <option value="Alight Motion|5000">Alight Motion - Rp 5.000</option>
+                    </select>
+                `;
+            }
+        }
+        function updatePricePanel(value) {
+            if(value == "0") return;
+            const parts = value.split('|');
+            const gb = parts[0];
+            const price = parseInt(parts[1]);
+            
+            selectedItemName = `Panel Bot WA ${gb}GB`;
+            selectedItemPrice = `Rp ${price.toLocaleString()}`;
+            document.getElementById('priceDisplay').innerText = selectedItemPrice;
+        }
+
+        function updatePriceSimple(value) {
+            if(value == "0") return;
+            const parts = value.split('|');
+            
+            selectedItemName = parts[0];
+            selectedItemPrice = `Rp ${parseInt(parts[1]).toLocaleString()}`;
+            document.getElementById('priceDisplay').innerText = selectedItemPrice;
+        }
+
+        function directBuy(name, price) {
+            selectedItemName = name;
+            selectedItemPrice = price.includes("Rp") ? price : `Rp ${price}`;
+            openPaymentModal();
+        }
+
+        function proceedToPayment() {
+            if(!selectedItemName) {
+                alert("Silakan pilih paket terlebih dahulu!");
+                return;
+            }
+            closeModal('modalSelection');
+            openPaymentModal();
+        }
+
+        function openPaymentModal() {
+            document.getElementById('modalPayment').style.display = 'flex';
+            document.getElementById('finalPrice').innerText = selectedItemPrice;
+            
+            const random = Math.floor(100000 + Math.random() * 900000);
+            generatedId = `RIIZID${random}`; 
+            document.getElementById('orderIdDisplay').innerText = generatedId;
+
+            // Reset upload status whenever modal is opened
+            isProofUploaded = false;
+            const proofUploadEl = document.getElementById('proofUpload');
+            if(proofUploadEl) proofUploadEl.value = '';
+            document.getElementById('uploadStatus').innerText = '(Wajib unggah. Maks 5MB)';
+            document.getElementById('uploadStatus').style.color = 'var(--neon-pink)';
+        }
+        
+        // NEW: Handle Image Upload
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            const statusEl = document.getElementById('uploadStatus');
+
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) { 
+                    statusEl.innerText = '🚨 File terlalu besar (Maks 5MB)!';
+                    statusEl.style.color = '#ff0055'; // neon-pink
+                    isProofUploaded = false;
+                    event.target.value = ''; // Clear file input
+                    return;
+                }
+
+                statusEl.innerText = `✅ Bukti Transfer Siap Diunggah: ${file.name.substring(0, 15)}...`;
+                statusEl.style.color = '#25D366';
+                isProofUploaded = true;
+            } else {
+                statusEl.innerText = '(Wajib unggah. Maks 5MB)';
+                statusEl.style.color = '#ff0055'; // neon-pink
+                isProofUploaded = false;
+            }
+        }
+
+
+        // --- FUNGSI KONFIRMASI WA (Alur Baru + Validasi Upload) ---
+        
+        function updateStatus(icon, text, subtext = '', isWarning = false) {
+            const iconEl = document.getElementById('confirmIcon');
+            const statusEl = document.getElementById('confirmStatus');
+            const subEl = document.getElementById('confirmSubtext');
+            
+            iconEl.className = `status-icon ${isWarning ? 'warning' : ''}`;
+            statusEl.className = `status-text-display ${isWarning ? 'warning' : ''}`;
+            
+            iconEl.innerHTML = icon;
+            statusEl.innerText = text;
+            subEl.innerText = subtext;
+            
+            if (icon.includes('circle-notch')) {
+                iconEl.classList.add('loading-ring');
+            } else {
+                iconEl.classList.remove('loading-ring');
+            }
+        }
+
+        function startWAConfirmation() {
+            // VALIDASI UPLOAD BUKTI
+            if (!isProofUploaded) {
+                alert("🚨 Harap unggah foto bukti transfer terlebih dahulu!");
+                return;
+            }
+            
+            closeModal('modalPayment');
+            document.getElementById('modalConfirmationStatus').style.display = 'flex';
+            
+            // Step 1: Koneksi
+            updateStatus('<i class="fa-solid fa-circle-notch"></i>', 'Conneting For Ari Mustopa...');
+
+            setTimeout(() => {
+                // Step 2: Status Sukses
+                updateStatus(
+                    '<i class="fa-solid fa-check-circle"></i>', 
+                    'Status Successful Connection..', 
+                    'Mempersiapkan pesan ke WhatsApp...',
+                    false
+                );
+                
+                // Build WA message with instruction to attach photo
+                const text = `Halo Admin Riiz - Devz, saya sudah melakukan pembayaran via QRIS.\n\n` +
+                             `Detail Pesanan:\n` +
+                             `- Produk: *${selectedItemName}*\n` +
+                             `- Harga: *${selectedItemPrice}*\n` +
+                             `- Kode Pesanan: *${generatedId}*\n\n` +
+                             `[PENTING] Mohon segera diproses. Saya akan *mengirimkan foto bukti transfer secara manual* di chat selanjutnya.`;
+                
+                setTimeout(() => {
+                    // Step 3: Buka WA
+                    updateStatus(
+                        '<i class="fa-brands fa-whatsapp"></i>', 
+                        'Lanjut Buka WhatsApp', 
+                        'Mengalihkan...',
+                        false
+                    );
+                    window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`, '_blank');
+                    closeModal('modalConfirmationStatus');
+                    
+                    // Reset upload status after redirect
+                    isProofUploaded = false;
+                    const proofUploadEl = document.getElementById('proofUpload');
+                    if(proofUploadEl) proofUploadEl.value = '';
+                    document.getElementById('uploadStatus').innerText = '(Wajib unggah. Maks 5MB)';
+                    document.getElementById('uploadStatus').style.color = '#ff0055';
+
+                }, 1500);
+
+            }, 2000); // End Step 1 (Connection Check)
+        }
+        
+        // --- FUNGSI BANTUAN LAIN ---
+        function startLiveChat() {
+            const modal = document.getElementById('modalChat');
+            const status = document.getElementById('chatStatus');
+            const sub = document.getElementById('chatSubtext');
+            const loader = document.getElementById('chatLoader');
+
+            modal.style.display = 'flex';
+            loader.style.display = 'inline-block';
+            status.innerText = "MENGHUBUNGKAN...";
+            status.style.color = "#fff";
+
+            setTimeout(() => {
+                status.innerText = "Conneting For Ari Mustopa...";
+                sub.innerText = "Mohon tunggu";
+            }, 2000);
+
+            setTimeout(() => {
+                loader.style.display = 'none';
+                status.innerText = "Status Successful Connection..";
+                status.style.color = '#00f3ff'; 
+                sub.innerText = "Mengalihkan ke WhatsApp...";
+                setTimeout(() => {
+                    window.open(`https://wa.me/${waNumber}?text=Halo%20Riiz%20-%20Devz%20Support`, '_blank');
+                    modal.style.display = 'none';
+                }, 1500);
+            }, 4000);
+        }
+
+        function openCheckOrder() {
+            const id = prompt("Masukkan ID Pesanan (RIIZID...):");
+            if(id) {
+                alert(`Pesanan ${id} tidak ditemukan atau belum dibayar.`);
+            }
+        }
+
+        function openQuestionForm() {
+            document.getElementById('modalQuestion').style.display = 'flex';
+        }
+
+        // Close outside click
+        window.onclick = function(e) {
+            if(e.target.classList.contains('modal-overlay')) {
+                e.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
